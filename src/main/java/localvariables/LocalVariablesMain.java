@@ -14,7 +14,10 @@ public class LocalVariablesMain {
             int x = 0;              //nem lehet
         }
         System.out.println(s);
+        String name = "John";
 
+        System.out.println(name.equals("John")); // 1
 
-    }
+        System.out.println("".equals(name)); // 2
+}
 }
