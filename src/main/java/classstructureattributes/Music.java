@@ -12,6 +12,6 @@ public class Music {
         System.out.println("How long is the song?");
         song.length = scanner.nextInt();
 
-        System.out.println(song.band + " - " + song.title + " (" + song.length + "min)");
+        System.out.println(song.band + "  " + song.title + " (" + song.length + "min)");
     }
 }
