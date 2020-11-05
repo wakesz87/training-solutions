@@ -3,8 +3,11 @@ package week02;
 
 
 public class Trainer {
-    public static void main(String[] args) {
-
+    public void saySomeThing() {
+        System.out.println("gyakorolj sokat!!!");
 
     }
-    }
+
+
+}
+
