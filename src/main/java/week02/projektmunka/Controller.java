@@ -13,9 +13,13 @@ public class Controller {
         int width;
 
         System.out.println("tárgyalók száma");
-        int numb = scanner.nextInt();
+        int numb  = scanner.nextInt();
+
 
         for (int i = 1; i < numb + 1; i++) {
+            System.out.println("tárgyaló neve");
+            name = scanner.nextLine();
+            scanner.nextLine();
             System.out.println("tárgyaló hossz");
             length = scanner.nextInt();
             scanner.nextLine();
@@ -28,7 +32,6 @@ public class Controller {
             office1.addMeetingRoom(room);
         }
     }
-
     public void printMenu() {
         System.out.println("1-tárgyalók sorrendben");
         System.out.println("2-tárgyalók visszafele sorrendben  ");

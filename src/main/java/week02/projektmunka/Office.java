@@ -14,12 +14,12 @@ public class Office {
 
 
     public void printNames() {
-        System.out.println("printNames");
+        System.out.println();
 
-        for (MeetingRoom meetingRoom : meetingRooms) {
+        for (MeetingRoom meetingRoom : meetingRooms)
             System.out.println(meetingRoom.getName());
         }
-    }
+    
 
     public void printNamesReverse() {
         for (int i = meetingRooms.size(); i > -1; i--) {
