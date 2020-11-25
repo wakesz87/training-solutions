@@ -1,11 +1,10 @@
-package week05d03;
-
-
+package week04;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ListCounter {
+public class DebugMain {
+
     public int find(List<String> words, String firstChar) {
         int count = 0;
 
@@ -20,15 +19,9 @@ public class ListCounter {
     }
 
     public static void main(String[] args) {
-        int count = new ListCounter().find(Arrays.asList("Aone", "two", "three", "onehundred"), "a");
+        int count = new DebugMain().find(Arrays.asList("Aone", "atwo", "three", "onehundred"), "a");
         System.out.println(count);
     }
 
 }
-
-
-
-
-
-
 
