@@ -20,7 +20,7 @@ public class ListCounter {
     }
 
     public static void main(String[] args) {
-        int count = new ListCounter().find(Arrays.asList("Aone", "two", "three", "onehundred"), "a");
+        int count = new ListCounter().find(Arrays.asList("Alma", "körte", "banán", "ananász"), "a");
         System.out.println(count);
     }
 
