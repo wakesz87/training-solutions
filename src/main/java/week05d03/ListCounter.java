@@ -10,7 +10,6 @@ public class ListCounter {
         int count = 0;
 
         for (String word :words) {
-
             if (word.toLowerCase().startsWith(firstChar)){
                 count ++;
             }
