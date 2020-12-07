@@ -1,4 +1,4 @@
-package week06d05;
+package week07d01;
 
 public class MathAlgorithms {
     public static boolean isPrime(long x) {
