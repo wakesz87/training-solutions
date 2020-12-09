@@ -8,6 +8,7 @@ class DigitSumTest {
     @Test
     public void testDigitSum() {
         assertEquals(6, DigitSum.sumOfDigits(123));
+
     }
 
 }
@@ -15,3 +16,13 @@ class DigitSumTest {
      mely visszaadja  a paraméterül kapott szám számjegyeinek összegét!
      pl.: 123 esetén a visszatérési érték 6.
      (Bocsi, hogy megint matekos holnap már nem az lesz ígérem */
+/*
+ public int sumOfDigits(int x){
+        int sum = 0;
+        String stringX = String.valueOf(x);
+        for(int i = 0; i < stringX.length(); i++){
+            sum += Character.getNumericValue(stringX.charAt(i));
+        }
+        return sum;
+}
+ */
