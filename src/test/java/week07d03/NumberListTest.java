@@ -19,7 +19,6 @@ class NumberListTest {
             assertTrue(new NumberList().isIncreasing(Arrays.asList(-1, 2, 3, 8)));
 
             assertFalse(new NumberList().isIncreasing(Arrays.asList(-1, -2, 3, 8)));
-            assertFalse(new NumberList().isIncreasing(Arrays.asList(-1, -2, 3, 8)));
             assertFalse(new NumberList().isIncreasing(Arrays.asList(2, 1, 3, 8)));
 
 
