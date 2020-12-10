@@ -36,6 +36,17 @@ public class Lab {
                 ", completedAt=" + completedAt;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public LocalDate getCompletedAt() {
+        return completedAt;
+    }
 }
 /* Hozz létre egy Lab nevű osztályt, ami azt tárolja el, hogy melyik feladattal készültél el.
 Két attribútuma: title ami a tananyag neve, egy completed, hogy elkészültél-e vele,

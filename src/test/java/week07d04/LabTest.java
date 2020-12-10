@@ -5,32 +5,28 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 class LabTest {
     @Test
-    public void Contructor1(){
-        Lab lab = new Lab("Match");
-        assertEquals("Subject info: title='Match', completed=false, completedAt=null", lab.toString());
+    void testCreate() {
+        assertFalse(new Lab("Interfesz").isCompleted());
+        assertTrue(new Lab("Methods", LocalDate.of(2020,12,11 )).isCompleted());
     }
-
     @Test
-    public void Contructor2(){
-        Lab lab = new Lab("Match", LocalDate.of(2020,11,15));
-        assertEquals("Subject info: title='Match', completed=true, completedAt=2020-11-15", lab.toString());
+    void testComplete() {
+        Lab lab =  new Lab("Methods");
+        LocalDate time = LocalDate.of(2020,12,11 );
+        lab.complete(time);
+        assertEquals(time, lab.getCompletedAt());
     }
-
     @Test
-    public void complete1(){
-        Lab lab = new Lab("Match");
-        lab.complete(LocalDate.of(2020,11,16));
-        assertEquals("Subject info: title='Match', completed=true, completedAt=2020-11-16", lab.toString());
-    }
-
-    @Test
-    public void complete2(){
-        Lab lab = new Lab("Match");
-        lab.complete();
-        assertEquals("Subject info: title='Match', completed=true, completedAt="+LocalDate.now(), lab.toString());
+    void testComplete2() {
+        Lab lab = new Lab("Methods");
+        LocalDate time = LocalDate.now();
+        lab.complete(time);
+        assertEquals(time, lab.getCompletedAt());
     }
 
 
