@@ -18,9 +18,9 @@ public class StringList {
         List<String> union = new ArrayList<>();
 
         for (String i : first) {
-            if (!union.contains(i)) {
-                union.add(i);
-            }
+            union.add(i);
+        }
+
 
             for (String p : second) {
                 if (!union.contains(p)) {
@@ -33,9 +33,9 @@ public class StringList {
             return union;
 
         }
-        return union;
+
     }
-}
+
 
 
 
