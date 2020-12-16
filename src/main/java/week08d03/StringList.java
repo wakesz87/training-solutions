@@ -1,6 +1,7 @@
 package week08d03;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,9 +23,9 @@ public class StringList {
         }
 
 
-            for (String p : second) {
-                if (!union.contains(p)) {
-                    union.add(p);
+            for (String i : second) {
+                if (!union.contains(i)) {
+                    union.add(i);
                 }
 
 
@@ -33,6 +34,15 @@ public class StringList {
             return union;
 
         }
+
+  /*  public static void main(String[] args) {
+        List<String> first = Arrays.asList("a","b","c");
+        List<String> second = Arrays.asList("a", "d");
+        StringList sl = new StringList();
+        System.out.println(first);
+        System.out.println(second);
+        System.out.println(sl.stringListUnion(first, second));
+    } */
 
     }
 
