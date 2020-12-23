@@ -8,7 +8,8 @@ class MathAlgorithmsTest {
     MathAlgorithms ma = new MathAlgorithms();
     @Test
     public void greatestCommonDivison(){
-        assertEquals(1, ma.greatestCommonDivisor(3,1));
+        assertEquals(10, ma.greatestCommonDivisor(30,10));
+        assertEquals(1, ma.greatestCommonDivisor(1,1));
     }
 
 }

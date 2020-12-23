@@ -17,7 +17,7 @@ public class MathAlgorithms {
 
     }
 
-  /*  public static void main(String[] args) {
+        public static void main(String[] args) {
         MathAlgorithms ma = new MathAlgorithms();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Adja meg az első számot");
@@ -27,5 +27,5 @@ public class MathAlgorithms {
 
         System.out.println("A számok legnagyobb közös osztója: " + "\n"
          + MathAlgorithms.greatestCommonDivisor(number1, number2));
-    }*/
+    }
 }
