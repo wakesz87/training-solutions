@@ -18,9 +18,9 @@ public class CvTest {
         Cv cv1 = new Cv("John Doe");
         assertEquals(0, cv1.getSkillList().size());
         cv1.addSkills("programming (5)", "oo design (2)");
-        assertEquals(2, cv1.getSkills().size());
-        assertEquals("programming", cv1.getSkills().get(0).getName());
-        assertEquals(5, cv1.getSkills().get(0).getLevel());
+        assertEquals(2, cv1.getSkillList().size());
+        assertEquals("programming", cv1.getSkillList().get(0).getName());
+        assertEquals(5, cv1.getSkillList().get(0).getLevel());
     }
 
     @Test
