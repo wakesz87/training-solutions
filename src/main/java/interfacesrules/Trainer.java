@@ -1,6 +1,6 @@
 package interfacesrules;
 
-public class Trainer implements HasName, CanWork {
+public class Trainer implements HasName,CanWork {
 
     private String name;
 
