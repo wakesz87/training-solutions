@@ -1,8 +1,10 @@
+package exam02.cv;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-/*
+
 public class CvTest {
 
     @Test
@@ -14,7 +16,7 @@ public class CvTest {
     @Test
     public void testAddSkills() {
         Cv cv1 = new Cv("John Doe");
-        assertEquals(0, cv1.getSkills().size());
+        assertEquals(0, cv1.getSkillList().size());
         cv1.addSkills("programming (5)", "oo design (2)");
         assertEquals(2, cv1.getSkills().size());
         assertEquals("programming", cv1.getSkills().get(0).getName());
@@ -38,4 +40,3 @@ public class CvTest {
     }
 
 }
-*/
