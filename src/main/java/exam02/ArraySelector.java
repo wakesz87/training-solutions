@@ -1,8 +1,29 @@
 package exam02;
 
-public class ArraySelector {
+import java.util.ArrayList;
+import java.util.List;
 
-}
+public class ArraySelector {
+    public String selectEvens(int[] numbs) {
+        String n = "";
+        if (numbs.length > 0){
+            n = n +"[";
+        }
+        for (int i = 0; i < numbs.length; i = i + 2) {
+            n = n + numbs[i];
+            if (i + 2 < numbs.length) {
+                n = n + ", ";
+            } else {
+                n = n + "]";
+            }
+        }
+        return n;
+    }
+
+    }
+
+
+
 /* Írj egy olyan metódust az ArraySelector osztályban,
  mely egy kapott tömbből minden második elemet kiválogat,
   és egy szövegként összerak, szögletes zárójelek között!
