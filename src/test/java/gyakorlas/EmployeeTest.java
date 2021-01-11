@@ -16,7 +16,7 @@ class EmployeeTest {
         courses.add("c++");
         Employee employee = new Employee("Szabolcs", 1987,courses);
 
-       // employee.getCourses().add("C+");
+        //employee.getCourses().add("C+");
 
         assertEquals(2,employee.getCourses().size());
     }

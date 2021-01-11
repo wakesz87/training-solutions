@@ -17,16 +17,8 @@ public class Employee {
         this.courses = courses;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getYearOfBirth() {
-        return yearOfBirth;
-    }
-
     public List<String> getCourses() {
-        //return courses;
+       // return courses;
         return  List.copyOf(courses);
     }
 }
