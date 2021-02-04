@@ -1,15 +1,15 @@
 package week10d05;
 
-import java.util.Arrays;
+import org.junit.jupiter.api.Test;
 
-class Calculator {
+import static org.junit.jupiter.api.Assertions.*;
 
-    public int findMinSum(int[] arr){
-        int MinSum =0;
-        Arrays.sort(arr);
-        for (int i=0;i<4;i++){
-            MinSum +=arr[i];
-        }
-        System.out.println(MinSum);
-        return MinSum;
-    }}
+class CalculatorTest {
+    @Test
+    void findMinSum() {
+        Calculator calculator = new Calculator();
+        int[] numbs = { 1, 3, 5, 7,9 };
+        assertEquals(16, calculator.findMinSum(numbs));
+    }
+
+}
