@@ -22,8 +22,4 @@ public class Site {
     public Fence getFence() {
         return fence;
     }
-
-    public String getOddEven() {
-
-    }
 }
