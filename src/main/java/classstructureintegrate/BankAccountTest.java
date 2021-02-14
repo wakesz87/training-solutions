@@ -1,0 +1,7 @@
+package classstructureintegrate;
+
+
+
+class BankAccountTest {
+
+}

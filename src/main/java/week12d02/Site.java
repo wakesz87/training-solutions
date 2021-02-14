@@ -8,7 +8,7 @@ public class Site {
     public Site(int evenOdd, int length, Fence fence) {
         this.evenOdd = evenOdd;
         this.length = length;
-        this.fence = fence;
+       // this.fence = fence;
     }
 
     public int getEvenOdd() {

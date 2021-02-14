@@ -7,7 +7,7 @@ public class FenceCondition {
 
 
     public FenceCondition(Fence fence, int numberOfFence) {
-        this.fence = fence;
+       // this.fence = fence;
         this.numberOfFence = numberOfFence;
     }
 

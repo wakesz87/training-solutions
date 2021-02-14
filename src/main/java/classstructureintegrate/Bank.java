@@ -38,7 +38,7 @@ public class Bank {
 
         System.out.println("how much you want to transfer from the first account to the second account");
         int transferAmount = scanner.nextInt();
-        account1.transfer(account2, transferAmount);
+       // account1.transfer(account2, transferAmount);
         System.out.println(account1.getInfo());
         System.out.println(account2.getInfo());
     }
