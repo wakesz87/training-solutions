@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<!-- saved from url=(0128)https://e-learning.training360.com/courses/take/mariadb/lessons/10192531-and-or-not-feltetelek-osszekapcsolasa-a-lekerdezesekben -->
+<html lang="hu"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="https://cdn.thinkific.com/" rel="preconnect">
+<link crossorigin="true" href="https://fonts.gstatic.com/" rel="preconnect">
+<link rel="preload" href="./db feladat_files/vendor-4d6e9185450966c0cabdb0b6ab7efd2c.js.letöltés" as="script" crossorigin="">
+<link rel="preload" href="./db feladat_files/course-player-v2-d1910b7ee797f718702ea478e8a67ede.js.letöltés" as="script" crossorigin="">
+<link rel="preload" href="./db feladat_files/vendor-e0cb822bbe090c173fe20baeb13b0c48.css" as="style" crossorigin="">
+<link rel="preload" href="./db feladat_files/course-player-v2-012f27700421f42e3ca545468910ffbc.css" as="style" crossorigin="">
+
+
+
+
+<script async="" src="./db feladat_files/analytics.js.letöltés"></script><script>
+  window.Thinkific = window.Thinkific || {};
+  window.Thinkific.current_user = {"id":32189902,"first_name":"Szabolcs","last_name":"Kiss","email":"kisszab87@gmail.com","external_source":null,"subdomain":"training360","full_name":"Szabolcs Kiss","created_at":1603871584,"last_sign_in_at":1607378647,"number_courses_complete":5,"external_id":null,"tenant_id":219412,"groups":[{"name":"Struktúraváltás | Training360 | JAVA BACKEND || 2021.10.25.","token":"6dc19397"},{"name":"Struktúraváltás | Training360 | Összes | T360 + NetA | 2021.10.25.","token":"a7a957a8"}]};
+</script>
+
+<title>Training360</title>
+
+
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link href="./db feladat_files/css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" type="image/x-icon" href="https://s3.amazonaws.com/thinkific-import/219412/DkEKKcnvRZuL43E8bGvt_TR360favicon.png">
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="X/E4Ga1bbY52c3cka1wHu9QtLRfJ445ZltlK8gnaAEWhUBiUyzcw3vZeHuOTdfleO5AxqlO2J0L65heneIxtkw==">
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+  let thinkific_google_analytics_disabled = ""
+  if (!thinkific_google_analytics_disabled) {
+    var tcd = "thinkific.com";
+    ga('create', 'UA-30557184-1', 'auto', { 'cookieDomain': tcd });
+    ga('send', 'pageview');
+  }
+  
+  var tenantGoogleAnalyticsKey = "";
+  
+  if(tenantGoogleAnalyticsKey) {
+    var tenantCD = "e-learning.training360.com";
+    ga('create', tenantGoogleAnalyticsKey, 'auto', { 'name': 'tenantTracker', 'cookieDomain': tenantCD });
+    ga('tenantTracker.send', 'pageview');
+  }
+</script>
+
+
+
+<link href="./db feladat_files/toga-icons.css" rel="stylesheet" type="text/css">
+<link href="./db feladat_files/toga-product-icons.css" rel="stylesheet" type="text/css">
+<meta name="kobayashi" content="96394bef7d4b4b147e480c3900bc2bc123772dba">
+<link rel="stylesheet" media="all" href="./db feladat_files/froala-v2-custom-theme-ce387945bbe5675a3124139056696f51721f6c75bc13a83788dad8e2826ab00e.css">
+<link rel="stylesheet" href="./db feladat_files/vendor-e0cb822bbe090c173fe20baeb13b0c48.css">
+<link rel="stylesheet" href="./db feladat_files/course-player-v2-012f27700421f42e3ca545468910ffbc.css">
+<meta name="description" content="MariaDB - bevezetés az SQL és a relációs adatbázisok világába - Training360">
+<style>
+      code{white-space: pre-wrap;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+</head>
+<body id="courses" class="take training360-tenant  course-id-598765"><noscript>
+<style>
+  body {
+    height: 100vh;
+    max-width: 100vw;
+    margin: 0;
+  }
+  #wrap {
+    display: none;
+  }
+  .noscript-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: #eee;
+  }
+  .noscript-container i {
+    font-size: 50px;
+  }
+  .noscript-container h3 {
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .noscript-container p {
+    font-size: 16px;
+    color: #929292;
+  }
+  .noscript-container a {
+    color: #1b9eea;
+  }
+  .noscript-container a.btn,
+  .noscript-container a.btn:visited {
+    padding: 8px 20px;
+    margin-top: 20px;
+    border: 1px solid #929292;
+    border-radius: 3px;
+    font-weight: 700;
+    text-decoration: none;
+    color: inherit;
+  }
+  .noscript-container a.btn:hover {
+    background-color: #e6e6e6;
+  }
+</style>
+<div class='noscript-container'>
+<i class='icon-settings'></i>
+<h3>A tartalom itt van, de engedélyezni kell a JavaScriptet annak megtekintéséhez.</h3>
+<p>Kérlek, <a target="_blank" href="https://www.enable-javascript.com"> engedélyezd a JavaScriptet </a> a böngésző beállításaiban, és töltsd be újra az oldalt.</p>
+<a class="btn" href="">Oldal újratöltése</a>
+</div>
+</noscript>
+
+<div id="wrap">
+<div id="data-store">
+<input id="CourseSlug" type="hidden" value="mariadb">
+</div>
+<div id="page-content" class="ember-application"><div id="modal-overlays"></div><div id="ember399" class="ember-view"><!----><a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192531-and-or-not-feltetelek-osszekapcsolasa-a-lekerdezesekben#main-content" class="skip-link">
+  Missing translation: course_player_skip_to_main_content
+</a>
+<div class="course-player  _course-player_1jimy1">
+<!---->    <link href="./db feladat_files/css(1)" rel="stylesheet">
+
+<style>
+  body,
+  button,
+  input,
+  textarea {
+    font-family:Open Sans;
+  }
+  [data-theme] .brand-color__background {
+    background-color:#ffffff;
+  }
+
+  [data-theme] .brand-color__text {
+    color:#ffffff;
+  }
+
+  [data-theme] .brand-color__dynamic-text {
+    color:#1d1d1d;
+  }
+
+  [data-theme] .brand-color__fill {
+    fill:#ffffff;
+  }
+
+  [data-theme] .brand-color__border {
+    border-color:#ffffff;
+  }
+
+  [data-theme] .brand-color__border-60-opacity {
+    border-color:rgba(255, 255, 255, 0.6);
+  }
+
+  [data-theme] .brand-color__border-60-opacity:not([disabled]):hover {
+    border-color:#ffffff;
+  }
+
+  [data-theme] .brand-color__background-30-opacity:not([disabled]):hover {
+    background-color:rgba(255, 255, 255, 0.3);
+  }
+
+  .course-player__content-item .toga-icon-checkmark::before {
+    color:#1d1d1d !important;
+  }
+
+  .course-player__chapter-item__header .toga-icon-checkmark::before {
+    color:#1d1d1d !important;
+  }
+</style>
+
+  <div data-theme="light-theme" id="player-wrapper" class="course-player__container  _course-player__container_n1vbpj">
+    <!---->
+      <header class="course-player__top-bar brand-color__background  _top-bar_n1vbpj">
+        <div class="_container_v3q4ce">
+  <button aria-label="Menü engedélyezése" class="course-player__top-bar__menu-toggle brand-color__dynamic-text _top-bar__menu-toggle_v3q4ce" data-ember-action="" data-ember-action-652="652">
+    <span class="course-player__top-bar__menu-toggle__bar _top-bar__menu-toggle__bar_v3q4ce"></span>
+    <span class="course-player__top-bar__menu-toggle__bar _top-bar__menu-toggle__bar_v3q4ce"></span>
+    <span class="course-player__top-bar__menu-toggle__bar _top-bar__menu-toggle__bar_v3q4ce"></span>
+  </button>
+
+  <div class="top-bar__dashboard-link _top-bar__dashboard-link_v3q4ce">
+      <a href="https://e-learning.training360.com/enrollments" class="top-bar__dashboard-link__anchor brand-color__dynamic-text">
+        <i aria-hidden="true" class="top-bar__dashboard-link__icon toga-icon toga-icon-caret-stroke-left brand-color__dynamic-text"></i>
+        Tovább a Vezérlőpultra
+      </a>
+  </div>
+  <section class="course-player__top-bar__branding _top-bar__branding_v3q4ce">
+      <div class="_logo__container_v3q4ce">
+        <img src="./db feladat_files/1581580612373Training360Logonewblack.png" alt="Training360" class="course-player__top-bar__logo _top-bar__logo_v3q4ce">
+      </div>
+      <h1 class="sr-only">Training360</h1>
+  </section>
+</div>
+
+      </header>
+      <div class="course-player__content     _course-player__content_n1vbpj">
+
+        <nav class="course-player__left-drawer _left-drawer_n1vbpj">
+          <div class="course-player__course-navigation _course-navigation_t2nzf7">
+
+  <div id="ember667" class="ember-view"><section class="course-progress__container _course-progress__container_1rtg53">
+<section class="surface__container _surface__container_1yatsw _surface--default_1yatsw">
+      <div class="course-progress__school-name brand-color__background _course-progress__school-name_1rtg53">
+      <div class="_container_v3q4ce">
+  <button aria-label="Menü engedélyezése" class="course-player__top-bar__menu-toggle brand-color__dynamic-text _top-bar__menu-toggle_v3q4ce" data-ember-action="" data-ember-action-676="676">
+    <span class="course-player__top-bar__menu-toggle__bar _top-bar__menu-toggle__bar_v3q4ce"></span>
+    <span class="course-player__top-bar__menu-toggle__bar _top-bar__menu-toggle__bar_v3q4ce"></span>
+    <span class="course-player__top-bar__menu-toggle__bar _top-bar__menu-toggle__bar_v3q4ce"></span>
+  </button>
+
+  <div class="top-bar__dashboard-link _top-bar__dashboard-link_v3q4ce">
+      <a href="https://e-learning.training360.com/enrollments" class="top-bar__dashboard-link__anchor brand-color__dynamic-text">
+        <i aria-hidden="true" class="top-bar__dashboard-link__icon toga-icon toga-icon-caret-stroke-left brand-color__dynamic-text"></i>
+        Tovább a Vezérlőpultra
+      </a>
+  </div>
+  <section class="course-player__top-bar__branding _top-bar__branding_v3q4ce">
+      <div class="_logo__container_v3q4ce">
+        <img src="./db feladat_files/1581580612373Training360Logonewblack.png" alt="Training360" class="course-player__top-bar__logo _top-bar__logo_v3q4ce">
+      </div>
+      <h1 class="sr-only">Training360</h1>
+  </section>
+</div>
+
+    </div>
+    <div class="course-progress__inner-container _course-progress__inner-container_1rtg53">
+      <a href="https://e-learning.training360.com/enrollments" class="course-progress__dashboard-link _course-progress__dashboard-link_1rtg53">Tovább a Vezérlőpultra</a>
+      <h2 class="course-progress__title _course-progress__title_1rtg53">MariaDB - bevezetés az SQL és a relációs adatbázisok világába</h2>
+      <div class="_course-progress__actions-container_1rtg53">
+        <div class="_course-progress__progress-bar__container_1rtg53">
+          <div style="width:33%;" class="brand-color__background _course-progress__progress-bar__inner_1rtg53"></div>
+        </div>
+        <p class="course-progress__percent-complete _course-progress__percent-complete_1rtg53"><span>33%</span> teljesítve</p>
+<!---->      </div>
+    </div>
+
+</section>
+</section>
+</div>
+
+  <div id="ember697" class=" ember-view"><div class="course-player__user-search _container_56qan">
+<div id="ember719" class="ember-basic-dropdown ember-view">
+<div aria-owns="ember-basic-dropdown-content-ember719" tabindex="0" data-ebd-id="ember719-trigger" role="button" id="ember724" class="ember-power-select-trigger ember-basic-dropdown-trigger ember-basic-dropdown-trigger--in-place ember-view">    <span class="ember-power-select-placeholder">Keresés a leckék címe alapján</span>
+
+<span class="ember-power-select-status-icon"></span>
+</div>
+  <div id="ember-basic-dropdown-content-ember719" style="display: none;" class="ember-basic-dropdown-content-placeholder"></div>
+
+</div>
+  <div id="user-content-search-power-select" class="course-player__user-search--power-select"></div>
+</div>
+</div>
+
+  <div role="navigation" aria-label="Fejezetek" class="course-player__chapters-menu ">
+    <ul id="ember752" class="course-player__chapters-item _chapters-item_1tqvoe ember-view ui-accordion ui-widget ui-helper-reset" role="tablist"><div class="course-player__chapter-item__header _chapter-item__header_d57kmg ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-1" aria-controls="ui-id-2" aria-selected="false" aria-expanded="false" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+  <div class="course-player__chapter-item__container _chapter-item__container_d57kmg">
+    <span class="course-player__progress _chapter-item__progress_d57kmg">
+      <span data-percentage-completion="100" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" class="_chapter-item__progress-ring_d57kmg">
+        <span class="progress-ring__ring _progress-ring__ring_jgsecr">
+	<span class="progress-ring__mask progress-ring--full _progress-ring__mask_jgsecr _progress-ring--full_jgsecr">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+	</span>
+	<span class="progress-ring__mask progress-ring--half _progress-ring__mask_jgsecr ">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+		<span class="progress-ring--fill progress-ring--fix _progress-ring--fill_jgsecr _progress-ring--fix_jgsecr"></span>
+	</span>
+</span>
+<span class="progress-ring__ring-inset _progress-ring__ring-inset_jgsecr"></span>
+<span class="progress-ring__checkmark brand-color__text _progress-ring__checkmark_jgsecr"><i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark"></i></span>
+
+      </span>
+    </span>
+
+    <h3 class="_chapter-item__title_d57kmg">Az adatbázisok és a MariaDB bemutatása</h3>
+
+<!---->
+      <span class="sr-only">Befejezve</span>
+
+    <span aria-hidden="true" class="course-player__chapter-item__completion _chapter-item__completion_d57kmg">
+      6 / 6
+    </span>
+
+    <span class="course-player__chapter-item__toggle _chapter-item__toggle_d57kmg">
+      <i aria-hidden="true" class="chapter-item__toggle-icon toga-icon toga-icon-caret-stroke-down _chapter-item__toggle-icon_d57kmg"></i>
+    </span>
+  </div>
+</div>
+<div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-2" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="true" style="display: none;">
+  <ul class="course-player__chapter-item__contents _chapter-item__contents_d57kmg">
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-772="772">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10770568-intro" id="ember777" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Intro
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-791="791">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192487-bevezetes" id="ember792" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Bevezetés
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-799="799">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192536-a-mariadb-es-a-heidi-letoltese-es-beallitasa" id="ember800" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      A MariaDB és a Heidi letöltése és beállítása
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-807="807">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192484-adatbazisokkal-kapcsolatos-alapfogalmak" id="ember808" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Adatbázisokkal kapcsolatos alapfogalmak
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-815="815">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192539-a-kulonbozo-kapcsolatok-tipusai" id="ember816" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      A különböző kapcsolatok típusai
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-823="823">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192538-szintaxis-adattipusok-es-tablak" id="ember824" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Szintaxis, adattípusok és táblák
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+  </ul>
+</div>
+</ul>
+    <ul id="ember830" class="course-player__chapters-item _chapters-item_1tqvoe ember-view ui-accordion ui-widget ui-helper-reset" role="tablist"><div class="course-player__chapter-item__header _chapter-item__header_d57kmg ui-accordion-header ui-corner-top ui-state-default ui-accordion-icons ui-accordion-header-active ui-state-active" role="tab" id="ui-id-3" aria-controls="ui-id-4" aria-selected="true" aria-expanded="true" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-s"></span>
+  <div class="course-player__chapter-item__container _chapter-item__container_d57kmg">
+    <span class="course-player__progress _chapter-item__progress_d57kmg">
+      <span data-percentage-completion="38" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="38" class="_chapter-item__progress-ring_d57kmg">
+        <span class="progress-ring__ring _progress-ring__ring_jgsecr">
+	<span class="progress-ring__mask progress-ring--full _progress-ring__mask_jgsecr _progress-ring--full_jgsecr">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+	</span>
+	<span class="progress-ring__mask progress-ring--half _progress-ring__mask_jgsecr ">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+		<span class="progress-ring--fill progress-ring--fix _progress-ring--fill_jgsecr _progress-ring--fix_jgsecr"></span>
+	</span>
+</span>
+<span class="progress-ring__ring-inset _progress-ring__ring-inset_jgsecr"></span>
+<span class="progress-ring__checkmark brand-color__text _progress-ring__checkmark_jgsecr"><i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark"></i></span>
+
+      </span>
+    </span>
+
+    <h3 class="_chapter-item__title_d57kmg">Egyszerű lekérdezések</h3>
+
+<!---->
+<!---->
+    <span aria-hidden="true" class="course-player__chapter-item__completion _chapter-item__completion_d57kmg">
+      3 / 8
+    </span>
+
+    <span class="course-player__chapter-item__toggle _chapter-item__toggle_d57kmg">
+      <i aria-hidden="true" class="chapter-item__toggle-icon toga-icon toga-icon-caret-stroke-down _chapter-item__toggle-icon_d57kmg"></i>
+    </span>
+  </div>
+</div>
+<div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" id="ui-id-4" aria-labelledby="ui-id-3" role="tabpanel" aria-hidden="false" style="">
+  <ul class="course-player__chapter-item__contents _chapter-item__contents_d57kmg">
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-838="838">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192530-select-adatok-kivalasztasa-az-adatbazis-tablaibol" id="ember839" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      SELECT - Adatok kiválasztása az adatbázis tábláiból
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-846="846">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192516-where-adatok-kivalasztasa-feltetelek-alapjan" id="ember847" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      WHERE - Adatok kiválasztása feltételek alapján
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--active _content-item_nffvg8" data-ember-action="" data-ember-action-854="854">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192531-and-or-not-feltetelek-osszekapcsolasa-a-lekerdezesekben" id="ember855" class="course-player__content-item__link _content-item__link_nffvg8 active ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle--active course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      AND, OR, NOT - Feltételek összekapcsolása a lekérdezésekben
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--complete _content-item_nffvg8" data-ember-action="" data-ember-action-858="858">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192506-order-by-talalatok-sorba-rendezese" id="ember859" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      ORDER BY - Találatok sorba rendezése
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-862="862">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192498-min-max-a-minimum-es-maximum-ertekek-keresese" id="ember863" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      MIN, MAX - A minimum és maximum értékek keresése
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-866="866">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192501-count-avg-sum-megszamlalas-atlagolas-es-osszegzes" id="ember867" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      COUNT, AVG, SUM - Megszámlálás, átlagolás és összegzés
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-870="870">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192518-group-by-talalatok-csoportositasa" id="ember871" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      GROUP BY - Találatok csoportosítása
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-874="874">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192529-like-kereses-hasonlosag-alapjan" id="ember875" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      LIKE - Keresés hasonlóság alapján
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+  </ul>
+</div>
+</ul>
+    <ul id="ember877" class="course-player__chapters-item _chapters-item_1tqvoe ember-view ui-accordion ui-widget ui-helper-reset" role="tablist"><div class="course-player__chapter-item__header _chapter-item__header_d57kmg ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-5" aria-controls="ui-id-6" aria-selected="false" aria-expanded="false" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+  <div class="course-player__chapter-item__container _chapter-item__container_d57kmg">
+    <span class="course-player__progress _chapter-item__progress_d57kmg">
+      <span data-percentage-completion="0" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" class="_chapter-item__progress-ring_d57kmg">
+        <span class="progress-ring__ring _progress-ring__ring_jgsecr">
+	<span class="progress-ring__mask progress-ring--full _progress-ring__mask_jgsecr _progress-ring--full_jgsecr">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+	</span>
+	<span class="progress-ring__mask progress-ring--half _progress-ring__mask_jgsecr ">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+		<span class="progress-ring--fill progress-ring--fix _progress-ring--fill_jgsecr _progress-ring--fix_jgsecr"></span>
+	</span>
+</span>
+<span class="progress-ring__ring-inset _progress-ring__ring-inset_jgsecr"></span>
+<span class="progress-ring__checkmark brand-color__text _progress-ring__checkmark_jgsecr"><i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark"></i></span>
+
+      </span>
+    </span>
+
+    <h3 class="_chapter-item__title_d57kmg">Összetett lekérdezések és adatmanipulációk</h3>
+
+<!---->
+<!---->
+    <span aria-hidden="true" class="course-player__chapter-item__completion _chapter-item__completion_d57kmg">
+      0 / 12
+    </span>
+
+    <span class="course-player__chapter-item__toggle _chapter-item__toggle_d57kmg">
+      <i aria-hidden="true" class="chapter-item__toggle-icon toga-icon toga-icon-caret-stroke-down _chapter-item__toggle-icon_d57kmg"></i>
+    </span>
+  </div>
+</div>
+<div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-6" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="true" style="display: none;">
+  <ul class="course-player__chapter-item__contents _chapter-item__contents_d57kmg">
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-885="885">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192521-insert-uj-rekordok-beszurasa-az-adattablakba" id="ember886" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      INSERT - Új rekordok beszúrása az adattáblákba
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-889="889">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192534-update-az-egyes-rekordok-frissitese" id="ember890" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      UPDATE - Az egyes rekordok frissítése
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-893="893">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192512-delete-rekordok-torlese" id="ember894" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      DELETE - Rekordok törlése
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-897="897">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192533-join-tablak-osszekotese" id="ember898" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      JOIN - Táblák összekötése
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-901="901">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192535-join-megvalositasa-osszerendelo-tabla-segitsegevel" id="ember902" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Join megvalósítása összerendelő tábla segítségével
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-905="905">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192493-egy-tabla-csatolasa-sajat-magahoz" id="ember906" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Egy tábla csatolása saját magához
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-909="909">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192527-megszoritasok" id="ember910" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Megszorítások
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-913="913">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192520-sorrend-nevvel-ellatott-megszoritasok" id="ember914" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Sorrend, névvel ellátott megszorítások
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-917="917">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192525-ertekek-automatikus-novelese" id="ember918" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      Értékek automatikus növelése
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-921="921">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192500-union-tablak-egyesitese" id="ember922" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      UNION - Táblák egyesítése
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-925="925">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192526-having-csoportfeltetelek-letrehozasa" id="ember926" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      HAVING - Csoportfeltételek létrehozása
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-929="929">
+<a href="https://e-learning.training360.com/courses/take/mariadb/lessons/10192532-create-tabla-letrehozasa-elsodleges-es-idegen-kulcsok-megadasa" id="ember930" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      CREATE - Tábla létrehozása, elsődleges és idegen kulcsok megadása
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-video _content-item__type-icon_nffvg8"></i>
+          Videó
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+  </ul>
+</div>
+</ul>
+    <ul id="ember932" class="course-player__chapters-item _chapters-item_1tqvoe ember-view ui-accordion ui-widget ui-helper-reset" role="tablist"><div class="course-player__chapter-item__header _chapter-item__header_d57kmg ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-7" aria-controls="ui-id-8" aria-selected="false" aria-expanded="false" tabindex="0"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span>
+  <div class="course-player__chapter-item__container _chapter-item__container_d57kmg">
+    <span class="course-player__progress _chapter-item__progress_d57kmg">
+      <span data-percentage-completion="0" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" class="_chapter-item__progress-ring_d57kmg">
+        <span class="progress-ring__ring _progress-ring__ring_jgsecr">
+	<span class="progress-ring__mask progress-ring--full _progress-ring__mask_jgsecr _progress-ring--full_jgsecr">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+	</span>
+	<span class="progress-ring__mask progress-ring--half _progress-ring__mask_jgsecr ">
+		<span class="progress-ring--fill brand-color__background _progress-ring--fill_jgsecr"></span>
+		<span class="progress-ring--fill progress-ring--fix _progress-ring--fill_jgsecr _progress-ring--fix_jgsecr"></span>
+	</span>
+</span>
+<span class="progress-ring__ring-inset _progress-ring__ring-inset_jgsecr"></span>
+<span class="progress-ring__checkmark brand-color__text _progress-ring__checkmark_jgsecr"><i role="img" aria-label="Befejezve" class="toga-icon toga-icon-checkmark"></i></span>
+
+      </span>
+    </span>
+
+    <h3 class="_chapter-item__title_d57kmg">Értékelés</h3>
+
+<!---->
+<!---->
+    <span aria-hidden="true" class="course-player__chapter-item__completion _chapter-item__completion_d57kmg">
+      0 / 1
+    </span>
+
+    <span class="course-player__chapter-item__toggle _chapter-item__toggle_d57kmg">
+      <i aria-hidden="true" class="chapter-item__toggle-icon toga-icon toga-icon-caret-stroke-down _chapter-item__toggle-icon_d57kmg"></i>
+    </span>
+  </div>
+</div>
+<div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-8" aria-labelledby="ui-id-7" role="tabpanel" aria-hidden="true" style="display: none;">
+  <ul class="course-player__chapter-item__contents _chapter-item__contents_d57kmg">
+      <li class="course-player__content-item released content-item__progress--incomplete _content-item_nffvg8" data-ember-action="" data-ember-action-940="940">
+<a href="https://e-learning.training360.com/courses/take/mariadb/surveys/11296858-ertekeles" id="ember941" class="course-player__content-item__link _content-item__link_nffvg8 ember-view">    <div class="brand-color__text _content-item__progress_nffvg8">
+        <i aria-hidden="true" class="content-item__progress-icon content-item__progress-icon--circle course-player__content-item__progress-icon _content-item__progress-icon_nffvg8"></i>
+    </div>
+    <div class="content-item__title _content-item__title_nffvg8">
+      ÉRTÉKELÉS
+      <div class="content-item__details _content-item__details_nffvg8">
+            <i aria-hidden="true" class="toga-icon toga-icon-content-survey _content-item__type-icon_nffvg8"></i>
+          Kérdőív
+<!----><!----><!----><!---->      </div>
+    </div>
+</a></li>
+  </ul>
+</div>
+</ul>
+</div>
+
+
+</div>
+
+          <!---->
+        </nav>
+
+        <main id="main-content" tabindex="-1" class="course-player__lesson _course-player__lesson_n1vbpj">
+<section class="surface__container _surface__container_1yatsw _surface--content_1yatsw">
+              <div class="_content-surface_n1vbpj">
+                <div class="course-player__content-header _content-header__container_h7ytgy">
+  <div class="_content-header__title-container_h7ytgy">
+        <h2 class="course-player__content-header__title _content-header__title_h7ytgy">AND, OR, NOT - Feltételek összekapcsolása a lekérdezésekben</h2>
+  </div>
+  <div class="course-player__content-header__actions _content-header__actions_h7ytgy">
+<!----><!---->
+    <button class="course-player__content-header__action-fullscreen _content-header__action-fullscreen_h7ytgy" data-ember-action="" data-ember-action-958="958">
+        <span class="sr-only">Teljes képernyős nézet engedélyezése</span>
+        <i aria-hidden="true" class="toga-icon toga-icon-arrow-grow"></i>
+    </button>
+  </div>
+</div>
+
+
+              <div class="content-modal-wrapper _content-modal-wrapper_n1vbpj">
+                <div class="content-modal _content-modal_n1vbpj">
+<!---->
+<!---->
+                  <section id="content-inner" class="course-player__content-inner _content-inner_n1vbpj">
+<!---->
+                    
+                    <div id="ember1163" class="ember-view"><!----></div>
+
+<!---->    <div class="_videoproxy__wrapper_3iu414">
+  <iframe src="./db feladat_files/boikcq2894no2mlc3vp0.html" id="iframe-ember1169" scrolling="no" seamless="" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" oallowfullscreen="" msallowfullscreen="" height="514" allow="autoplay" title="Video Lesson" class="_videoproxy__iframe_3iu414"></iframe>
+
+    <div id="ember1170" class="ember-view"><div class="_content_1yintd">
+    <div class="">
+      <div id="ember1171" class="ember-view"><div class="custom-theme">
+  <div class="fr-view">
+    <div class="fr-view"><p>A WHERE parancs után jönnek a feltételek. Ezek között is lehetnek logikai<br>kapcsolatok és vannak is. Az egyes feltételeket fogjuk most összefűzni.</p><h3>AND</h3><p>A feltételek között logikai kapcsolat áll fenn, ezen belül az AND kapcsolat<br>a legegyszerűbb. Az ismert programozási szabályok vonatkoznak rá, azaz akkor lesz<br>igaz, ha az mindkettő feltétel igaz azok közül amelyek az AND két oldalán állnak.</p><pre style="margin-left: 20px;"><code>SELECT * FROM Customers
+WHERE Country="Germany" AND City="Berlin";
+</code></pre><p>Ez egy tipikus AND kapcsolat. Akkor fog a lekérdezés eredményébe bekerülni egy<br>rekord, ha a vásárló országa Germany és a városa Berlin. Tehát ha mondjuk<br>Németországban lakik az illető de München -ben és nem Berlinben, akkor nem lesz<br>látható az eredmények között. Jegyezd meg, az AND feltétel esetén mindkét oldalnak<br>igaznak kell lennie.</p><h3>OR</h3><p>Nem nehéz kitalálni, hogy ez ugyanaz lesz mint mondjuk JAVASCRIPT estén a két<br>függőleges vonallal jelölt "||" or feltétel. Tehát ha a két feltétel közül csak<br>az egyik igaz, akkor is igaz lesz az egész kifejezés.</p><pre style="margin-left: 20px;"><code>SELECT * FROM Customers
+WHERE City='Berlin' OR City='München';
+</code></pre><p>Ez a lekérdezés mindenkit vissza fog adni aki Berlinben vagy Münchenben lakik.</p><h3>NOT</h3><p>A NOT szaknyelven a negáció. Azaz ha megfordítom valaminek a logikai értékét,<br>azaz tagadom. Ez JAVASCRIPT esetén a felkiáltójel "!".</p><pre style="margin-left: 20px;"><code>SELECT * FROM Customers
+WHERE NOT Country='Germany';
+</code></pre><p>Így mindenki meg fogunk kapni a Customers táblából aki nem németországban lakik.</p><h3>Kombináljunk</h3><p>A fenti kifejezéseket tetszőleges módon kombinálhatod is.</p><pre><code>SELECT * FROM Customers
+WHERE Country='Germany' AND (City='Berlin' OR City='München');
+</code></pre><p>Nézzük sorban.</p><ol><li><p>Először bontsuk fel a zárójelet: mindenkit visszaad, akinek Berlin vagy München<br>a városa.</p></li><li><p>Az AND miatt pedig csak azokat fogja visszaadni akikre igaz az első feltétel<br>és még ennek tetejében Germany az országuk is.</p></li></ol><p>Összefoglalva, mindenki aki Németországban lakik és azon belül a városa<br>Berlin vagy München.</p><hr><h3>Dokumentáció:</h3><p><a href="https://www.w3schools.com/sql/sql_and_or.asp" target="_blank">AND OR NOT</a></p><h3>Önálló feladatok</h3><p><strong>A YellowRoad adatbázisban dolgozz!</strong></p><ol><li><p>Készíts lekérdezést, amely kiválasztja a Teacher táblából az összes tanárt<br>akinek 1-nél nagyobb az id-je és Budapesten vagy Debrecenben lakik.</p></li><li><p>Készítsd el ugyanezt a Student táblára is.</p></li></ol></div>
+  </div>
+</div></div>
+    </div>
+
+<!----></div>
+</div>
+</div>
+
+
+                  </section>
+                      <footer id="course-player-footer" data-navigation="content" aria-label="Course content navigation" class="course-player__content-navigation _content-navigation_apmbd3 _no-audio_apmbd3">
+  <button class="brand-color__background brand-color__dynamic-text _button--default--small_142a8m _button--icon-right--small_142a8m" data-ember-action="" data-ember-action-1244="1244">
+    <div class="_content__wrapper_142a8m">
+<!---->  <div class="_content__container_142a8m">
+                <span>Befejezés és továbblépés</span>
+            <i aria-hidden="true" class="toga-icon toga-icon-arrow-right"></i>
+
+  </div>
+</div>
+
+  </button>
+          </footer>
+  <!---->
+
+                </div>
+              </div>
+            </div>
+
+</section>
+        </main>
+
+        <aside class="course-player__right-drawer _right-drawer_n1vbpj">
+          <div class="course-player__course-discussions _course-discussions_n1vbpj">
+            <!---->
+          </div>
+        </aside>
+
+      </div>
+<!---->  </div>
+
+  <!---->
+<!---->
+<!---->  <div id="ember473" class="ember-notify-cn ember-notify-default ember-view"><!----></div>
+</div></div></div>
+<div id="push"></div>
+</div>
+<script src="./db feladat_files/vendor-4d6e9185450966c0cabdb0b6ab7efd2c.js.letöltés"></script>
+<script src="./db feladat_files/course-player-v2-d1910b7ee797f718702ea478e8a67ede.js.letöltés"></script>
+<script src="./db feladat_files/kobayashi-f6f0dd26779c1d810afe17fe6c29e1ba12090e081aec0b200aba36c43b9436f9.js.letöltés"></script>
+<script src="./db feladat_files/moment.min.js.letöltés"></script>
+<script src="./db feladat_files/hu-7c0a02f88fe6d7ad5317b281f77d4131e0308a109f7f88a3b9d1db178e613542.js.letöltés"></script>
+<script>moment.locale("hu")</script>
+<script src="./db feladat_files/jquery-ui.min.js.letöltés"></script>
+
+
+<script>
+  var userId = 32189902;
+  var email = 'kisszab87@gmail.com';
+  var mixpanelPerson = {
+    $email: email,
+    $created: '2020-10-28 07:53:04 +0000',
+    $last_login: '2020-12-07 22:04:07 +0000',
+    $first_name: 'Szabolcs',
+    $last_name: 'Kiss',
+    'sign_in_count': 7,
+    'admin': false,
+    'referral_code': '',
+    'tenant': 'Training360',
+    'subdomain': 'training360',
+    'Is Paying': 'false',
+    'Revenue': '0.0',
+    'Courses': ["C++ alapok","Tesztautomatizálás alapok","Java SE alapok - Java nyelvi elemek","Java SE haladó - Kollekciók és osztálykönyvtárak","Java Backend képzés kiegészítő anyagok","Java SE haladó - Kivétel- és fájlkezelés","3. Bevezetés az SQL Server használatába - Adatok módosítása","Agilis alapgondolatok","Azure AI","Azure Storage Account","Enterprise Linux hálózatok menedzselése és haladó lehetőségei","Időjárás-állomás építés Raspberry Pi és C++ segítségével","Microsoft 365 E5 áttekintés","Microsoft Defender for Endpoint","Microsoft Defender for Identity","Windows 10 átállás","5. Angular 2 plusz keretrendszer - Firebase","Bootstrap4 ","Windows 10 útikalauz felhasználók számára","Bevezetés a Docker használatába","Objektum Orientált tervezés, fejlesztés","Az online tanulás módszertana","Symfony3 Bemelegítés","Angular 9 - alapok","Ionic Fénysebességgel","Angular 9 középhaladó","Angular Master - Haladó","NodeJS express","NodeJS Beugró","Verziókezelés és közös munka Git segítségével","Java SE alapok - Java OO elemek","PowerShell","ESZA kérdőív","Windows Serer 2019 Hyper-V","NA - 3. Wunderground API-integráció","NA - 2. C++ fejlesztés Raspberry Pi-n","NA - 9. Python OOP","NA - Koronavírustérkép II. Front end Reacttel","NA - Certified Information Systems Security Professional - CISSP - older version (classic)","NA - Hibrid és Public Cloud (classic)","NA - Copy of Titkosítási algoritmusok a gyakorlatban (classic)","NA - Futtatókörnyezetek magas rendelkezésreállása (classic)","NA - HTML5 bemutató (classic)","NA - Kezdő Linux tanfolyam (classic)","NA - Kártyajáték XAML és C# használatával (classic)","NA - Kezdő PHP (classic)","NA - Kezdő Windows rendszerépítés és rendszerfelügyelet (classic)","NA - Klienskörnyezet magas rendelkezésreállása 2. (classic)","NA - Kisvállalati Linux szerver (classic)","NA - Klienskörnyezet magas rendelkezésreállása (classic)","NA - Konverzióközpontú dizájn és wireframe tervezés (classic)","NA - Körlevél, címkék létrehozása (8. rész) (classic)","NA - Korrektúra, dokumentumvédelem (classic)","NA - Java programozás (classic)","NA - C# alapok 2018: a multiplatform C# (classic)","NA - Bootstrap - tegyük negyedikbe (classic)","NA - Bevezető a Wireshark képzéshez (classic)","NA - Bevezetés az objektumorientált világba: a SNAKE projekt (classic)","NA - IoT tsunami-rendszer (classic)","NA - Bevezetés az Azure-ba (classic)","NA - Bevezetés az Amazon Cloud lehetőségeibe (classic)","NA - Az SQL varázslatos világa (classic)","NA - Bevezetés a WiFi hálózatok biztonsági tesztelésébe (classic)","NA - Bugvadászat hostingplatformokon (classic)","NA - Bevezetés a Raspberry PI és a beágyazott szoftverfejlesztésbe (classic)","NA - Bevezetés a Kotlin fejlesztésbe (classic)","NA - Bárányfelhő (classic)","NA - Bevezetés a 32 bites mikrovezérlők világába (classic)","NA - Az Érzelmi Intelligencia, mint a siker előfeltétele (classic)","NA - Az Excel előnyei, korlátai (5. rész) (classic)","NA - Betekintés az objektumorientált programozásba a weben is: az étterem projekt (classic)","NA - Az Office 365 szolgáltatásainak bemutatása (classic)","NA - Az első webes C# projektem: TO-DO alkalmazás készítése (classic)","NA - Az adatvezérelt marketing alapjai (classic)","NA - Az elektronika alapismeretei (classic)","NA - Asszertivitás-önérvényesítés (classic)","NA - ASP.NET Core szerveroldali fejlesztés (classic)","NA - Arduino és C programozás ATmega mikrovezérlőn (classic)","NA - Középhaladó Windows rendszerépítés és rendszerfelügyelet II. (classic)","NA - Pénztermelő webáruház megtervezése (classic)","NA - Legyen profi Facebook oldalad! (classic)","NA - Laborkörnyezet kialakítása a hálózati tanfolyamokhoz (classic)","NA - Legyen profi Instagram-oldalad! (classic)","NA - Lenyűgöző C# programozás (classic)","NA - Linux alapok Raspberry PI-vel (classic)","NA - Linux alapú virtualizáció (classic)","NA - Magas rendelkezésreállás Windows Server környezetben (classic)","NA - Makrók a szövegszerkesztésben (classic)","NA - Levelezőrendszerek mindenkinek (classic)","NA - pfSense alapok (classic)","NA - pfSense bevezetés és alapok (classic)","NA - Linqpad alapok (classic)","NA - Lenyűgöző Unity (classic)","NA - Makrók, VBA-kódok használata (9. rész) (classic)","NA - MikroTik hálózatok kialakítása (classic)","NA - Malware analízis (classic)","NA - Mobil app - az ötlettől a validálásig (classic)","NA - NodeJS Képzés (classic)","NA - Nyílt forrású információszerzés - beugrószint (classic)","NA - Növeld webáruházad forgalmát Facebook hirdetésekkel! (classic)","NA - NUGET csomag készítése (classic)","NA - Nyelvhelyesség, helyesírás és stílus a modern hivatali és üzleti kommunikációban (classic)","NA - Nyílt kulcsú titkosítás a gyakorlatban 3.rész (classic)","NA - Nyílt kulcsú titkosítás a gyakorlatban 2.rész (classic)","NA - Objektumok beillesztése szöveges dokumentumokba (classic)","NA - Munkavédelmi ismeretek az irodában (classic)","NA - OneNote a munkahelyen (classic)","NA - MQL4 programozás (classic)","NA - Mobil Appra fel! - Ionic (classic)","NA - Monitorozás, loggyűjtés (classic)","NA - Miért érdemes objektumorientáltan programozni? Étterem projekt (classic)","NA - Privát, Publikus, Hibrid felhős technológiák védelme (classic)","NA - PHP, MySQL kezdő tanfolyam (classic)","NA - PCI/DSS v3.2 (classic)","NA - Outlook 2016 képzés irodai dolgozóknak (classic)","NA - PHP a gyakorlatban I. (classic)","NA - Programozási alapismeretek C# nyelven (classic)","NA - Miért érdemes objektumorientáltan programozni: SNAKE projekt  (classic)","NA - Photoshop alapismeretek (classic)","NA - Privát felhő alapok (classic)","NA - Programozás JavaScriptben (classic)","NA - Node Marci! (classic)","NA - Piackutatásból reklám (classic)","NA - R tanfolyam (classic)","NA - Python programozás alapok (classic)","NA - Programozási alapismeretek JavaScriptben (classic)","NA - R kezdőknek (classic)","NA - Sikeres delegálás (classic)","NA - Rakj össze egy Ethereum blockchaint fél óra alatt! (classic)","NA - Speciális eszközök a szövegszerkesztésben (classic)","NA - SQL Server 2012 adatbáziskezelés (classic)","NA - RMS: Nagyvállalatok játékszere csupán? (classic)","NA - SBS 2011 rendszerfelügyelet (classic)","NA - Szoftverfejlesztés Java-ban (classic)","NA - Angular intro- Eseményvadász (classic)","NA - Angular Advanced (classic)","NA - Amazon Cloud hálózati infrastruktúra (classic)","NA - Alkalmazáskiszolgálók, kliensek, protokollok védelme  (classic)","NA - Android alapok: API-val töltött lista! (classic)","NA - Amazon cloud, fájlok a felhőben (classic)","NA - Adatok megjelenítése (4. rész) (classic)","NA - Adatok feldolgozása Excel programmal (3. rész) (classic)","NA - Certified Information Systems Security Professional - CISSP (classic)","NA - Adatmodellezés Cassandrában (classic)","NA - Adatkezelés Excel táblázatkezelővel (1. rész) (classic)","NA - C# nagyoknak (classic)","NA - Adatbevitel Excel táblába (2. rész) (classic)","NA - Bootstrap 4 (classic)","NA - Adatbáziskezelési alapfogalmak, Access (6. rész) (classic)","NA - AD Séma bővítése (classic)","NA - Active Directory Linux szerveren (classic)","NA - Active Directory frissítése (classic)","NA - ESP8266 programozása Arduino és C nyelven (classic)","NA - Excel All in (classic)","NA - Access és Excel közös használata (7. rész) (classic)","NA - A Raspberry PI és a beágyazott szoftverfejlesztés (classic)","NA - Google Analytics abszolút kezdőknek (classic)","NA - A hét legfontosabb Google Analytics mutatószám (classic)","NA - Így lesznek sikeresek a Facebook hirdetéseid: A/B tesztelés! (classic)","NA - A mikroservicek Java! (classic)","NA - IT-biztonsági szakértő (classic)","NA - Hálózatautomatizáció (classic)","NA - Négy haladó Facebook hirdetési praktika (classic)","NA - IT Sec Reality - Etikus Hacker (classic)","NA - .NET webfejlesztés MVC-vel (classic)","NA - ITIL Foundation, Edition 2011 (classic)","NA - .NET webalkalmazás készítése nulláról (classic)","NA - Javascript - Szent Habakuk, hisz játszom! (classic)","NA - jQuery alapozás (classic)","NA - Keresőoptimalizálás a gyakorlatban A-tól Z-ig lépésről-lépésre (classic)","NA - Lenyűgöző weblapok készítése (classic)","NA -.NET praktikák haladóknak (classic)","NA - Nyílt kulcsú titkosítás a gyakorlatban 1. rész (classic)","NA - Unity UI (classic)","NA - Server Core kezelés, PowerShell ismeretek (classic)","NA - Titkosítási algoritmusok a gyakorlatban (classic)","NA - Videovágás alapok – Final Cut Pro X használatával (classic)","NA - Mi tesz sikeressé egy IT-s szakembert, a technikai tudás mellett? (classic)","NA - VueJS - Ja hogy ezt így is lehet (classic)","NA - Windows Server 2016 Active Directory üzemeltetés (classic)","NA - A Java mikroservicek alapjai (classic)","NA - Design Patterns (classic)","NA - A Docker alapjai (classic)","NA - Bevezető: Java programozás haladóknak 1.nap (classic)","NA - MySQL Adatbáziskezelés (classic)","NA - MySQL bevezető (classic)","NA - Metasploit (classic)","NA - Network monitorozás Wiresharkkal (classic)","NA - C alapok (classic)","NA - Informatikai nyomelemzés (classic)","NA - Android programozás (classic)","NA - Haladó .NET programozás (classic)","NA - Cassandra Alapok (classic)","NA - 5. LEMP: Linux + (E)Nginx+ Mariadb+ Php","NA - 4. LAMP: Linux + Apache + Mariadb+ Php","NA - 4. Python fejlesztés Raspberry Pi-n","NA - 3. Linux - rendszergazdai feladatok","NA - 1. Raspberry Pi beüzemelése","NA - Java Spring Security","NA - 2. Linux - az első lépések","NA - 1. Linux telepítése VirtualBox alá","NA - Koronavírustérkép III. Térképanimáció","NA - Koronavírustérkép I. Back end Node.js-sel","NA - HTML, CSS, Bootstrap4 (classic)","NA - HTML- és CSS-alapozó (classic)","NA - HTML és CSS tanártovábbképzés (classic)","NA - HTML 5 reloaded (classic)","NA - Hozz létre profi Facebook hirdetéseket! (classic)","NA - Hosszú, szöveges dokumentumok tagolása, egységes formázása (classic)","NA - Honlapdiagnosztika, avagy mennyire áll készen a weboldalad a marketingre? (classic)","NA - Hogyan szerezz új vevőket Facebook hirdetésekkel? (classic)","NA - Hogyan népszerűsítsd vállalkozásodat Facebook-hirdetésekkel? (classic)","NA - Hogyan célozd meg a weboldalad látogatóit a Facebookon? (classic)","NA - Hitelesítés, titkosítás és adatrejtés az iparban (classic)","NA - Hitel- és megtakarításszámítás (classic)","NA - Hibrid és Public Cloud (classic)","NA - Hatékony programozás .NET-ben (classic)","NA - Hálózati támadási formák és ezek érzékelése (classic)","NA - Hálózati automatizáció lehetőségei Ansible segítségével (classic)","NA - Hálózati alapismeretek (classic)","NA - Hálózatbiztonsági felügyeleti eszközök (classic)","NA - Hálózatbiztonság (classic)","NA - Hálózatbiztonság Defense-in-Depth elvek szerint (classic)","NA - Haladó Raspberry PI és beágyazott szoftverfejlesztés (classic)","NA - Haladó PHP (classic)","NA - HALADÓ LINUX tanfolyam (classic)","NA - Haladó Android Kotlin nyelven (classic)","NA - Haladó .NET programozás (classic)","NA - Gyermekeink egészsége (classic)","NA - Group Policy-k kezelése gyakorlatiasan (classic)","NA - Google Adwords-hirdetések (classic)","NA - GlovEye - Hogyan készült? (classic)","NA - FKERES (VLOOKUP) és ami azon túl van (HOL.VAN,INDEX) (classic)","NA - Figyelemfelkeltő weblapok készítése gyorsan és egyszerűen (classic)","NA - Fizikai hálózat, eszközök védelme: WiFi, LAN (classic)","NA - Fejlesztői Microsoft Azure képzés (classic)","NA - Fedezzük fel a gitet! (classic)","NA - Exchange 2016 üzemeltetés (classic)","NA - Facebook vagy LinkedIn, melyik a jobb neked? (1. rész)  (classic)","NA - Facebook bolti terület használata (classic)","NA - Exchange Server 2013-2016 üzemeltetés (classic)","NA - Exchange 2010 üzemeltetés (classic)","NA - jQuery - alapozás (classic)","NA - JS a gyakorlatban I. (classic)","NA - jQuery és AJAX (classic)","NA - Cisco CCNA hálózati alapismeretek (classic)","NA - Címtárszolgáltatás Linuxon (classic)","NA - Ceph, a soklábú fájlrendszer (classic)","NA - 8. Időjárásjelentés Pythonnal","NA - Számítógépes látás: YoloV3 összeszerelési útmutató","NA - 6. Email küldése Pythonnal nem csak Pythonosoknak","NA - 5. YAML és Python","NA - 3. Python essentials - import (és arcdetektálás OpenCV-vel)","NA - 10. PONG játék OOP-vel Pythonban","NA - 7. Webalkalmazások tesztelése böngészőben - Selenium Pythonnal","NA - 3. Rendszámfelismerés OpenCV-vel","NA - 6. OpenCV telepítése és arcfelismerés Raspberryn","NA - 5. Raspberry PI 4 telepítése","NA - 4. Visual Studio Code for Python Develeopers","NA - 5. Chatbot-vizsga","NA - 2. Python essentials","NA - 3. Haladó chatbot komplex rendelésfelvétellel","NA - 2. Szegmentáló és vásárlási döntést segítő chatbot készítése","NA - 4. Chatbot - hűségprogram ","NA - 1. Az első ChatBotom","NA - Active Directory 2019","NA - SharePoint portál építése (classic)","NA - SQL szerver jogosultságkezelés (classic)","NA - Szövegszerkesztési alapok (classic)","NA - Szövegírási tippek abszolút kezdőknek (classic)","NA - SQL Server teljesítménytuningolás (classic)","NA - Szöveges adatállományok adatainak feldolgozása Excel környezetben (classic)","NA - Szöveges dokumentum közzététele (classic)","NA - SEO (avagy keresőoptimalizálás) abszolút kezdőknek (classic)","NA - Social Engineering (classic)","NA - Szerszámkészlet IT vezetőknek/profiknak, 1. rész (classic)","NA - Titkosítási ABC (classic)","NA - Unity - Bevezetés a 2D játékfejlesztésbe (classic)","NA - Unity - játékfejlesztés modern eszközökkel (classic)","NA - Váltás technikai szakértőből vezetővé (classic)","NA - Vállalkozóiskola (classic)","NA - VMware 5 virtualizáció (classic)","NA - VBA programozás kezdőknek (classic)","NA - Vue - A végtelenbe és tovább! (classic)","NA - Verziókövetés Microsoft-módra (classic)","NA - w-EB App (classic)","NA - VueJS alapok (classic)","NA - Webalkalmazások biztonsági vizsgálata (classic)","NA - Webanalitika és mérés (classic)","NA - Webáruház teljesítményének mérése, értékelése (classic)","NA - Webáruház-ügyfélkezelés, CRM (classic)","NA - WEB Superhero (classic)","NA - Webes TODO alkalmazás készítése (classic)","NA - Webkiszolgálás NGINX alapokon (classic)","NA - Websecurity Mesterkurzus I. (classic)","NA - Websecurity alapozó (classic)","NA - Websecurity nyalánkságok (classic)","NA - Windows 10 alapok (classic)","NA - Webshop létrehozása (classic)","NA - Websecurity (classic)","NA - Windows 8, Windows 2012 rendszerüzemeltetés (classic)","NA - App!képzés: Androidos mobilalkalmazás-fejlesztés (classic)","NA - Windows desktop alkalmazások fejlesztése (classic)","NA - Windows Server 2016 újdonságok I. (classic)","NA - App! képzés (classic)","NA - Windows Server AD kezelése (classic)","NA - Xamarin-fejlesztés mobileszközökre (classic)","NA - App! iOS mobilalkalmazás-fejlesztés (classic)","NA - Wordpress BootCamp (classic)","NA - Windows Server 2016 AD upgrade MesterQrzus (classic)","NA - App! design képzés (classic)","NA - Windows 2012 R2 rendszerfelügyelet kezdőknek (classic)","NA - Windows Server 2016 hálózati szolgáltatások (classic)","NA - Windows Server alapismeretek, telepítés (classic)","NA - Wordpress alapok (classic)","NA - Windows Server alapok (classic)","NA - Windows Stack High Availability (classic)","NA - Angular Pro (classic)","NA - Windows tűzfalak kezelése a gyakorlatban (classic)","NA - 4. Arcok detektálása fényképezővel, IoT-eszközökkel (elmélet)","NA - Security Awareness alapok","NA - Weblap mentése képként Chrome-böngészővel (mini)","NA - AI: Deep Face Lab (mini)","NA - AI: neuronhálózati alapismeretek, egy zsiráf felismerése","NA - Trükkös Excel sorforgatás - Worddel 😉 (mini)","NA - Mongo DB","NA - Új GDPR","NA - Adobe Illustrator  - az eszközök bemutatása","NA - 6. Unity-vizsga","NA - 5. Unity UI","NA - 3. Unity hálózatok","NA - 4. Unity 2D","NA - 2. Unity játékfejlesztés","NA - 1. Unity fejlesztési környezet","NA - PowerBI-kimutatások készítése ","NA - Egy őszinte Facebook-reklám tanfolyam","NA - 6. Docker használata Windows környezetben ASP.NET Core fejlesztéshez","Na - 4. Repository fejlesztése TDD-vel és xUnit-tal","NA - 5. Repository integrációs tesztelése xUnittal SQLite adatbázissal memóriában és fájlban","NA - 3.  xUnit bevezetés - az első működő xUnit tesztig - CRUD Create tesztje","NA - 2. Entity Framework Core bevezetés SQLite adatbázis használatával","NA - 1. C# alapú fejlesztési projekt  - bevezetés","NA - Levelezés és csoportmunka Outlookkal","NA - Hitel- és CSOK számítása Excellel","NA - IOS Basics, English version","NA - Adobe Animate - Animálás kezdőknek","NA - Active Directory trust-kapcsolatok","NA - 1. Kezdő PowerPoint","NA - DHCP","NA - Zoho Mail üzemeltetése","NA - WebFlow Business: egy vállalati weboldal létrehozása fejléctől láblécig","NA - Shopify","NA - Egy friss, ropogós Windows 10 beállítása","NA - DNS","NA - Asszertivitás","NA - Android Clean Architecture","NA - SQL Queries, English version","NA - Adatbekérő készítése Vue segítségével","NA - Adobe Premier - az első vágás","NA - Lenyűgöző weblap készítése WebFlow használatával","NA - Verziókövetés Gittel egyszerűen és nagyszerűen","NA - 3. PowerPoint vetítés: élet az F5-ön túl!","NA - Word körlevélkészítés","NA - 2. PowerPoint vállalati környezetben","NA - Windows hack fizikai hozzáféréssel","NA - AI: jönnek a robotok, és megesznek minket uzsonnára","NA - COBIT 5","NA - SQL-lekérdezések futtatása","NA - Amazon: kereskedés Magyarországról az USA-ba","NA - IOS-alapok - Tic Tac Toe játék elkészítése","NA - Office 365 - Exchange","NA - Áttérés Windows 2019 Active Directoryra","NA - Virtuális gép futtatása Azure-ban","NA - 7. Microsoft SQL Server 2017 monitorozása","NA - 8. Microsoft SQL Server 2017 import-export","NA - 6. SQL Indexing","NA - 5. Microsoft SQL Server 2017 feladatok automatizálása","NA - 4. Microsoft SQL Server 2017 adatbázisok mentése és visszaállítása","NA - 3. A Microsoft SQL Server 2017 jogosultsági rendszere","NA - 1. Microsoft SQL Server 2017 telepítése","NA - 2. Microsoft SQL Server 2017 adatbázis létrehozása","NA - Android-alkalmazásfejlesztés Kotlinnal","NA - Python képzés: PONG","NA - 2. Machine Learning, egyedi Haar Cascade betanítása","NA - 1. Arcfelismerés OpenCV-vel","NA - 1. PONG játék megírása Pythonban egyszerűen","NA - A Cassandra programozása (classic)","NA - Java programozás haladóknak (2.nap-végéig) (classic)","NA - 4. PowerPoint és multimédia","3. Gyártófüggetlen hálózati alapismeretek - Szolgáltatások és eszközök üzemeltetők számára","2. Gyártófüggetlen hálózati alapismeretek - A hálózati hardverek áttekintése","1. Gyártófüggetlen hálózati alapismeretek - Hálózati alapismeretek","Az agilitás alapkoncepciói","Bootstrap beugró","3. Windows alapok - Alapvető Windowsos szoftverek","2. Windows alapok - A Windows parancssor","1. Windows alapok - Számítógépes alapismeretek","Szoftvertesztelés Hamcrest, AssertJ és Mockito használatával","Szoftvertesztelés Junit használatával","Bevezetés a szoftvertesztelésbe","8. SQL alapok - Adatkezelés","7. SQL alapok - Beágyazott lekérdezések és halmazműveletek","6. SQL alapok - Többtáblás lekérdezések","5. SQL alapok - Adatok csoportosítása","4. SQL alapok - Konverziós és kondíciós kifejezések","3. SQL alapok - Egysoros függvények","2. SQL alapok - Szűrés és rendezés","1. SQL alapok - Az Oracle SQL bemutatása","Windows 10 útikalauz üzemeltetők számára","jQuery - a legnépszerűbb js library\t","A VMware vSphere 6.7 újdonságai","10. VMware vSphere 6.5 - Update Manager ","9. VMware vSphere 6.5 - DRS","8. VMware vSphere 6.5 - vSphere - Hibatűrés és magas rendelkezésre állás ","7. VMware vSphere 6.5 - Erőforrás menedzsment és monitorozás","6. VMware vSphere 6.5 - A virtuális gépek menedzsmentje","5. VMware vSphere 6.5 - vSphere adattárak kezelése","4. VMware vSphere 6.5 - A virtuális hálózatok menedzsmentje","3. VMware vSphere 6.5 - vCenter Server","2. VMware vSphere 6.5 - Virtuális gépek készítése","1. VMware vSphere 6.5 - A VMware vSphere 6.5 áttekintése","11. A vállalati webfejlesztés alapjai - DELETE, POST és PUT","10. A vállalati webfejlesztés alapjai - Backend","9. A vállalati webfejlesztés alapjai - A DOM és a feltételek","8. A vállalati webfejlesztés alapjai - Objektumok","7. A vállalati webfejlesztés alapjai - Egy időjárás-előrejelzés implementálása","6. A vállalati webfejlesztés alapjai - Kódoptimalizálás","5. A vállalati webfejlesztés alapjai - Űrlapok készítése JavaScript segítségével","4. A vállalati webfejlesztés alapjai - Űrlapok készítése","3. A vállalati webfejlesztés alapjai - A CSS alapjai","2. A vállalati webfejlesztés alapjai - Egy statikus HTML oldal készítése és publikálása","1. A vállalati webfejlesztés alapjai - A (web)fejlesztőkörnyezet kialakítása","Microsoft Azure alapok","10. VMware vSphere optimalizálás - Biztonsági megoldások","9. VMware vSphere optimalizálás - vCenter High Availability","8. VMware vSphere optimalizálás - Analízis, Prediktív DRS","7. VMware vSphere optimalizálás - Hálózat optimalizálás","6. VMware vSphere optimalizálás - Adattár optimalizálás","4. VMware vSphere optimalizálás - CPU optimalizálás","5. VMware vSphere optimalizálás - Memória optimalizálás","3. VMware vSphere optimalizálás - A menedzsment környezet skálázása","2. VMware vSphere optimalizálás - Adattár skálázás","1. VMware vSphere optimalizálás - A hálózat skálázása","Informatikai tudatosság (IT biztonság alapjai)","Windows Server 2019 hálózati szerepkörök (DNS, DHCP)","Windows Server 2019 telepítése, beállítása és újdonságai","Java 8 plusz újdonságok - Java idő és dátumkezelés és további újdonságok","Java 8 plusz újdonságok - Funkcionális programozás elemei és streamek","Adatbázis programozás Java nyelven - JPA","Bevezetés a tervezési minták és refaktoring használatába Java nyelven","Spring - webalkalmazás fejlesztés","Spring - Adatbáziskezelés","Spring - IOC container","Enterprise alkalmazásfejlesztés Java EE környezetben","Java SE mester - Reflection és annotációk","Java SE mester - Generikusok","Java alapú webfejlesztés JSF technológiával","4. Angular 2 plusz keretrendszer - Űrlapok","3. Angular 2 plusz keretrendszer - Ajax és Angular","2. Angular 2 plusz keretrendszer - Komponensek és direktívák","1. Angular 2 plusz - Bevezetés","4. Enterprise Linux üzemeltetés alapok - Rendszerfelügyelet","3. Enterprise Linux üzemeltetés alapok - Rendszermenedzsment","NA - Excel trükkök a hatékonyabb mindennapi munkavégzéshez (classic)","NA - Ethical Hacking (classic)","NA - Értékesítési tölcsér készítése (classic)","NA - Erőforrások magas rendelkezésreállása (classic)","NA - Email marketing (classic)","NA - Elastic Search dióhéjban (classic)","NA - Electron (classic)","NA - Egyszerű játék készítése XAML alapokon (classic)","NA - HTML5 programozás (classic)","NA - HTML5 tanfolyam (classic)","NA - Egy világbajnok webalkalmazás (classic)","NA - E-mail marketing abszolút kezdőknek (classic)","NA - A DSLR fotózás alapjai (classic)","NA - Időgazdálkodás- hatékonyság (classic)","NA - Dokumentumok egységesítése (classic)","NA - Dinamikus webdesign (classic)","NA - DevOps Azure-on (classic)","NA - Design Patterns és Antipatterns (classic)","NA - Informatikai fogalomtár a GDPR-hoz (classic)","NA - Így tervezd meg a Facebook hirdetési kampánytervedet!  (classic)","NA - ASP.NET MVC gyorstalpaló (classic)","NA - Bevezető oktatás a MySQL képzéshez (classic)","NA - Dagobert Nemcsíp - HTML + JS (classic)","NA - Bevezető: iOS mobilalkalmazás-fejlesztés (classic)","NA - Bevezető: Java programozás haladóknak (classic)","NA - Docker-bemutató (classic)","NA - Hálózatbiztonsági alapozó (classic)","NA - HTML-alapozó (classic)","NA - iOS-alapozó (classic)","NA - Java alapozó Androidhoz (classic)","NA - Metasploit bevezető (classic)","NA - Malware bemutatóóra (classic)","NA - iOS mobilalkalmazás-fejlesztés (classic)","NA - MCPD4 (classic)","NA - Wordpress bemutató (classic)","NA - Social Engineering (classic)","NA - Windows Server 2012 üzemeltetés tanfolyam (classic)","NA - Irodai tűzvédelmi ismeretek (classic)","NA - ISO 27001 (classic)","NA - Ionic - Appra fel! (classic)","NA - IT Camp 2.: Hyper-V A-tól Z-ig (classic)","NA - Java programozási alapok (classic)","NA - JavaScript a felhők között (classic)","NA - Java Spring Boot (classic)","NA - JavaScript alapok (classic)","NA - jQuery - a hajnalok hajnalán (classic)","NA - JavaScript minden eszközre (classic)","NA - Jogosultságok kezelése (classic)","NA - A Computer Forensics jogi vonzata (classic)","NA - CISSP vizsgafelkészítő (classic)","2. Enterprise Linux üzemeltetés alapok - BASH","Python alapok","5. JavaScript haladó - Objektum Orientált Programozás","4. JavaScript haladó - Aszinkron programozás","3. JavaScript haladó - Modulok és kivételek","2. JavaScript haladó - Szövegek, számok és dátumok","1. JavaScript haladó - Változók, függvények és tömbök","7. Android Java - Az alkalmazás backendjének elkészítése","6. Android Java - Az alkalmazás frontendjének elkészítése","5. Android Java - Az Android UI komponensek használata ","4. Android Java - Az Android layout vezérlők áttekintése","3. Android Java - Java nyelvi alapok","2. Android Java - Egy Hello World alkalmazás elkészítése","1. Android Java - Az Android platform bemutatása","6. Kotlin Android - Az adatok és szolgáltatások kezelése","5. Kotlin Android - A Képek és a hálózat kezelése","4. Kotlin Android - Az üzleti logika és a megjelenítés szétválasztása","3. Kotlin Android - Kotlin nyelvi alapok","2. Kotlin Android - Egy Hello World akalmazás elkészítése","1. Kotlin Android - Az Android platform bemutatása","7. iOS - Tesztelés","6. iOS - Perzisztálás","5. iOS - Az iOS alkalmazás háttérműveletei","4. iOS - Az eszközkompatibilitás biztosítása","3. iOS - iOS UI elemek és képernyők","2. iOS - Swift alapok","1. iOS - Az iOS fejlesztőkörnyezet bemutatása","9. IT Essentials - Virtualizáció és felhő szolgáltatások","8. IT Essentials - Hálózati infrastruktúra és hálózat biztonság","7. IT Essentials - Elterjedt Windows hálózati szolgáltatások és alkalmazások","6. IT Essentials - Fájl és nyomtató provizionálás","5. IT Essentials - Fontos IT szolgáltatások","4. IT Essentials - Szerverek figyelése és hibakeresése","3. IT Essentials - Szerverek telepítése és konfigurálása","2. IT Essentials - Operációs rendszer alapismeretek","1. IT Essentials - Hálózati alapismeretek","2. Bevezetés az SQL Server használatába - Összetettebb adatbázis-műveletek","1. Bevezetés az SQL Server használatába - Egyszerű lekérdezések","1. Enterprise Linux üzemeltetés alapok -  A Linux működésének alapjai","3. ITIL® 4 Foundation - Menedzsment gyakorlatok","2. ITIL® 4 Foundation - A szolgáltatásmenedzsment 4 dimenziója","1. ITIL® 4 Foundation - Szolgáltatásmenedzsment a digitalizáció világában","A szolgáltatásmenedzsment szabványa: ISO 20000-1","A Linux üzemeltetés alapjai","Firebase - Backend a Felhőből","CCNA - 2020","SASS/SCSS alapok","Python haladó","Struktúraváltás","Adatbázis programozás Java nyelven - JDBC","MariaDB - bevezetés az SQL és a relációs adatbázisok világába"]
+  };
+  var personTraits = {
+    'email': email,
+    'createdAt': '2020-10-28T07:53:04+00:00',
+    'firstName': 'Szabolcs',
+    'lastName': 'Kiss',
+    'name': 'Szabolcs Kiss'
+  };
+  ThinkificAnalytics.identify_for_tenant(email, mixpanelPerson, personTraits);
+  ThinkificAnalytics.name_tag(email);
+</script>
+
+
+
+
+
+
+
+</body></html>
