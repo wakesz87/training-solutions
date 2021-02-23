@@ -15,35 +15,57 @@ public class MailBox {
         return new ArrayList<>(mails);
     }
 
-/*
-public static void main(String args[]) {
-      String Str = new String("Welcome to Tutorialspoint.com");
-
-      System.out.print("Return Value :" );
-      System.out.println(Str.startsWith("Welcome") );
- */
-
-    /*    A keresési feltételek lehetnek:
-
-from:John Doe vagy from:johndoe@example.com - from: előtaggal visszaadja az összes olyan levelet, ahol a feladó neve
- vagy e-mail címe pontosan a from: után szereplő szöveg
-to:John Doe vagy to:johndoe@example.com - from: előtaggal visszaadja az összes olyan levelet, ahol a címzettek között
- szerepel olyan, akinek a neve vagy e-mail címe pontosan a to: után szereplő szöveg
-egyéb esetben visszaadja az összes olyan levelet, amiben szerepel a tárgyban vagy üzenetben a megadott szó
-     */
-
-
     public List<Mail> findByCriteria(String criteria) {
-        List<Mail> result  = new ArrayList<>();
-
         if (criteria.startsWith("from:")) {
-            result.add(mail);
+            return foundMailsWithFrom(criteria);
         } else if (criteria.startsWith("to:")) {
-         result.add(mail);
+            return foundMailsWithTo(criteria);
         } else {
-            result.add(mail);
-        }
-
+            return foundMailsWithSubjectOrMessage(criteria);
         }
     }
 
+    private List<Mail> foundMailsWithFrom(String criteria) {
+        int index = criteria.indexOf(":") + 1;
+        String from = criteria.substring(0, index);
+        String searched = criteria.substring(index);
+
+        List<Mail> found = new ArrayList<>();
+        for (Mail m : mails) {
+            if (m.getFrom().getName().equals(searched) || m.getFrom().getEmail().equals(searched)) {
+                found.add(m);
+            }
+        }
+        return found;
+    }
+
+    private List<Mail> foundMailsWithTo(String criteria) {
+        int index = criteria.indexOf(":") + 1;
+        String to = criteria.substring(0, index);
+        String searched = criteria.substring(index);
+
+        List<Mail> found = new ArrayList<>();
+        for (Mail m : mails) {
+            searchAndAddToList(searched, m, found);
+        }
+        return found;
+    }
+
+    private void searchAndAddToList(String searched, Mail m, List<Mail> found) {
+        for (Contact c : m.getTo()) {
+            if (c.getName().equals(searched) || c.getEmail().equals(searched)) {
+                found.add(m);
+            }
+        }
+    }
+
+    private List<Mail> foundMailsWithSubjectOrMessage(String criteria) {
+        List<Mail> found = new ArrayList<>();
+        for (Mail m : mails) {
+            if (m.getSubject().contains(criteria) || m.getMessage().contains(criteria)) {
+                found.add(m);
+            }
+        }
+        return found;
+    }
+}
