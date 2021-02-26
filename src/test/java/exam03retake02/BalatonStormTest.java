@@ -17,4 +17,4 @@ class BalatonStormTest {
             assertEquals(List.of("Ábrahámhegy", "Balatonfüred", "Balatonszárszó"), new BalatonStorm().getStationsInStorm(reader));
         }
     }
-}}
+}
