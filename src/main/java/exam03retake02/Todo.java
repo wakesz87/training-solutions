@@ -28,7 +28,10 @@ public class Todo {
     public int getPriority() {
         return priority;
     }
-    public void complete() {
-        this.state = State.COMPLETED;
+    public State complete() {
+        if (state == State.NON_COMPLETED) {
+            State newState= State.COMPLETED;
+        }
+        return State.COMPLETED;
     }
 }
