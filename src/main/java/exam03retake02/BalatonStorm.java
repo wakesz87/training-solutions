@@ -23,7 +23,7 @@ public class BalatonStorm {
             }
 
         }
-        //lista rendezése
+        //lista rendezése collatoral
         stationsInStorm.sort(Collator.getInstance(new Locale("hu", "HU")));
         return stationsInStorm;
     }
