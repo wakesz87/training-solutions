@@ -30,5 +30,6 @@ public class Operation {
         System.out.println(sum.leftValue);
         System.out.println("+");
         System.out.println(sum.rightValue);
+        System.out.println(sum.getResults());
     }
 }
