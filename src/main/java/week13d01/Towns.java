@@ -1,3 +1,5 @@
+////A GitHubon a examples\week13d01\src\main\resources\iranyitoszamok-varosok-2021.csv
+//// fájl tartalmazza a magyar városok listáját. Add vissza a leghosszabb nevű várost!
 package week13d01;
 
 import week12d05.CoronaOfIndex;
