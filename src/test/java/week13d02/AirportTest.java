@@ -5,15 +5,15 @@ import java.nio.file.Path;
 import java.time.LocalTime;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AirportTest {
+//public class AirportTest {
 
-    @Test
-    void readFile() {
-        Airport a = new Airport();
-        a.readFile(Path.of("src/main/resources/cities.txt"));
-
-        assertEquals(100, a.getFlights().size());
-    }
+//    @Test
+//    void readFile() {
+//        Airport a = new Airport();
+//        a.readFile(Path.of("src/main/resources/cities.txt"));
+//
+//        assertEquals(100, a.getFlights().size());
+//    }
 
 //    @Test
 //    void whatsMore() {
@@ -49,4 +49,4 @@ public class AirportTest {
 //
 //        assertEquals("FG3210 DEPARTURE Zurich 06:16", a.getEarliestDepartureFlight().toString());
 //    }
-}
+//}
