@@ -1,7 +1,7 @@
 package week05d02;
 
 public class Changeletter {
-  public static final String  VOWELS = "aeiou";
+  public static final String  VOWELS = "aeiouAEIOU";
 
   public String changeVOWELS(String str) {
       str = str.toLowerCase();
@@ -13,11 +13,12 @@ public class Changeletter {
           }
       }
       return results.toString();
+  }
 
-
-
-
-}
+    public static void main(String[] args) {
+        Changeletter cg =  new Changeletter();
+        
+    }
 
 
     }
