@@ -1,3 +1,7 @@
+//A fájl tantárgyfelosztást tartalmaz. A tanttárgyfelosztást 4-es blokkokban adjuk meg.
+// Első sor a tanár neve, majd a tantárgy, majd az osztály ahol tanítja és végül az, hogy heti hány órában.
+// Írj egy metódust,ami paraméterül várja egy tanár nevét, és kiírja, hogy hány órája van egy héten.
+// A fájl megtalálható a examples\week13d03\src\main\resources\beosztas.txt
 package week13d03;
 
 import java.io.BufferedReader;
