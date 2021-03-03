@@ -1,3 +1,6 @@
+//Töltsd le az index.hu nyitólapját böngészőből, ez egy html állomány!
+// Másold be a projektedbe (index.html) néven! Ez egy szöveges állomány.
+// Olvasd be, és számold meg, hány sorban szerepel a koronavírus szó!
 package week12d05;
 
 import java.io.BufferedReader;
