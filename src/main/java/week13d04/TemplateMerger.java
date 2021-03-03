@@ -1,3 +1,9 @@
+//Írj egy a TemplateMerger osztályba egy public String merge(Path file, List<Employee> employees)
+// metódust, ami felolvassa a fájlt, melynek tartalma:
+//Az alkalmazott neve: {nev}, születési éve: {ev}
+//Majd a visszatérési értékként add vissza soronként az alkalmazottakat, abban a formátumban, mint ahogy a fájlban van, azaz:
+//Az alkalmazott neve: John Doe, születési éve: 1980
+//Az alkalmazott neve: Jack Doe, születési éve: 1990
 package week13d04;
 
 import java.io.IOException;
