@@ -9,12 +9,11 @@ public class EmployeesMain {
     public static void main(String[] args) {
         MariaDbDataSource dataSource;
         try {
-          dataSource = new MariaDbDataSource();
+            dataSource = new MariaDbDataSource();
             dataSource.setUrl("jdbc:mariadb://localhost:3308/employees?useUnicode=true");
             dataSource.setUser("employees");
             dataSource.setPassword("employees");
-        }
-        catch (SQLException se) {
+        } catch (SQLException se) {
             throw new IllegalStateException("Can not create data source", se);
         }
 
@@ -27,20 +26,23 @@ public class EmployeesMain {
 //        } catch (SQLException se){
 //            throw new IllegalStateException("Can not insert", se);
 //        }
+//
+//        try(                                                                                            //mariadb tabla lekerdezese szlopok alapjan
+//                Connection conn = dataSource.getConnection();
+//                Statement stmt = conn.createStatement();
+//                ResultSet rs = stmt.executeQuery("select emp_name from employees")
+//                ){
+//            while (rs.next()) {
+//                String name = rs.getString("emp_name");
+//                System.out.println(name);
+//            }
+//        }
+//        catch (SQLException se) {
+//            throw new IllegalStateException("Cannot select employees", se);
+//        }
 
-        try(                                                                                            //mariadb tabla lekerdezese
-                Connection conn = dataSource.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("select emp_name from employees")
-                ){
-            while (rs.next()) {
-                String name = rs.getString("emp_name");
-                System.out.println(name);
-            }
-        }
-        catch (SQLException se) {
-            throw new IllegalStateException("Cannot select employees", se);
-        }
+
 
     }
 }
+
