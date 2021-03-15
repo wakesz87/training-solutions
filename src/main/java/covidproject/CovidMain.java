@@ -14,15 +14,35 @@ public class CovidMain {
         System.out.println("4. Oltás felvétele ");
         System.out.println("5. OLtás meghiúsulása");
         System.out.println("6. Riport");
-        System.out.println("9. Kilépés");
         String menuBar = sc.nextLine();
 
 
         if(menuBar.equals("1")){
-            try{
 
-            }
 
         }
+        if(menuBar.equals("2")){
+
+
+        }
+        if(menuBar.equals("3")){
+
+
+        }
+        if(menuBar.equals("4")){
+
+
+        }
+        if(menuBar.equals("5")){
+
+
+        }
+        if(menuBar.equals("6")){
+
+
+        }
+
+
     }
+
 }
