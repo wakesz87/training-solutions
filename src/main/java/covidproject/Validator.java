@@ -3,7 +3,7 @@ package covidproject;
 public class Validator {
 
     public static String nameValidator(String name) {
-        validateIsNotNullOrEmptyString(name);
+        //validateIsNotNullOrEmptyString(name);
         String[] split = name.split(" ");
         if (split.length < 2) {
             throw new IllegalArgumentException("Invalid name: " + name);
@@ -18,7 +18,7 @@ public class Validator {
     }
 
     public static String emailValidator(String email) {
-        validateIsNotNullOrEmptyString(email);
+       // validateIsNotNullOrEmptyString(email);
         // Ha nincs kukac az emailben,vagy a kukac előtt kevesebb,mint 3 karakter található vagy utána nincs pont
         // karakter,akkor hibát dob
         if (email.contains("@")) {
